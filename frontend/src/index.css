@@ -1,0 +1,168 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+@import '@fontsource/inter/900.css';
+
+:root {
+  --navy: #1e2d7d;
+  --ink: #141d5c;
+  --green: #2fa35a;
+  --teal: #0f766e;
+  --amber: #e0a020;
+  --danger: #d64545;
+  --bg: #e9ecf2;
+  --line: #e3e7ee;
+  --slate: #64748b;
+  --slate2: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html,
+body {
+  overflow: hidden;
+  background: var(--bg);
+  color: #1e293b;
+  font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, sans-serif;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.top {
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.6vw;
+  background: var(--navy);
+  color: #fff;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+.logo {
+  font-weight: 900;
+  font-size: 2.6vh;
+  letter-spacing: -0.02em;
+}
+.hbar {
+  height: 2.6vh;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.35);
+}
+.htitle {
+  font-size: 2vh;
+  font-weight: 600;
+}
+.hmeta {
+  font-size: 1.4vh;
+  color: #c7cbe8;
+}
+
+.grid {
+  height: 94vh;
+  display: grid;
+  gap: 1vh 1vw;
+  padding: 1vh 1vw;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1.12fr 1fr;
+  grid-template-areas:
+    'status aderencia devolucao economia'
+    'atrasos atrasos desempenho desempenho'
+    'modalidade modalidade volume volume';
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 1.2vh;
+  padding: 1.3vh 1vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-shadow: 0 1px 2px rgba(20, 29, 92, 0.05);
+}
+.ct {
+  font-size: 1.8vh;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.chead {
+  flex: none;
+  margin-bottom: 1vh;
+}
+.cbody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+.a-atrasos {
+  grid-area: atrasos;
+}
+.a-desempenho {
+  grid-area: desempenho;
+}
+.a-modalidade {
+  grid-area: modalidade;
+}
+.a-volume {
+  grid-area: volume;
+}
+.a-status {
+  grid-area: status;
+}
+.a-aderencia {
+  grid-area: aderencia;
+}
+.a-devolucao {
+  grid-area: devolucao;
+}
+.a-economia {
+  grid-area: economia;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6vh 1.1vw;
+  margin-top: 1vh;
+}
+.lg {
+  display: flex;
+  align-items: center;
+  gap: 0.4vw;
+  font-size: 1.35vh;
+  color: #475569;
+}
+.sw {
+  width: 1.2vh;
+  height: 1.2vh;
+  border-radius: 3px;
+}
+.sw.r {
+  border-radius: 999px;
+}
+.sublabel {
+  font-size: 1.4vh;
+  font-weight: 600;
+  color: var(--slate);
+  margin-bottom: 0.6vh;
+}
