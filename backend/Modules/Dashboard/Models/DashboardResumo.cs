@@ -2,15 +2,27 @@ namespace DashboardCorrente.Modules.Dashboard.Models;
 
 public record DashboardResumo
 {
+    public required PeriodoAtual Atual { get; init; }
+    public required PeriodoAno Ano { get; init; }
+    public required EconomiaNegociacao Economia { get; init; }
+}
+
+public record PeriodoAtual
+{
+    public required VolumeCompras VolumeCompras { get; init; }
+    public required StatusPedido StatusPedido { get; init; }
+    public required AderenciaSla AderenciaSla { get; init; }
+    public required List<ModalidadePorComprador> ModalidadePorComprador { get; init; }
+    public required List<DesempenhoComprador> DesempenhoPorComprador { get; init; }
+}
+
+public record PeriodoAno
+{
     public required StatusPedido StatusPedido { get; init; }
     public required AderenciaSla AderenciaSla { get; init; }
     public required Devolucao Devolucao { get; init; }
     public required Reincidencia Reincidencia { get; init; }
-    public required EconomiaNegociacao Economia { get; init; }
-    public required List<AtrasoGrupoProduto> AtrasosPorGrupoProduto { get; init; }
-    public required List<DesempenhoComprador> DesempenhoPorComprador { get; init; }
-    public required List<ModalidadePorComprador> ModalidadePorComprador { get; init; }
-    public required VolumeCompras VolumeCompras { get; init; }
+    public required List<DesempenhoComprador> AtrasosPorComprador { get; init; }
 }
 
 public record StatusPedido
@@ -45,14 +57,6 @@ public record EconomiaNegociacao
     public required decimal ValorCotado { get; init; }
     public required decimal ValorNegociado { get; init; }
     public required decimal Economia { get; init; }
-}
-
-public record AtrasoGrupoProduto
-{
-    public required string GrupoProduto { get; init; }
-    public required int NoPrazo { get; init; }
-    public required int EmAtraso { get; init; }
-    public required double PercentualAtraso { get; init; }
 }
 
 public record DesempenhoComprador

@@ -27,13 +27,6 @@ export interface EconomiaNegociacao {
   economia: number;
 }
 
-export interface AtrasoGrupoProduto {
-  grupoProduto: string;
-  noPrazo: number;
-  emAtraso: number;
-  percentualAtraso: number;
-}
-
 export interface DesempenhoComprador {
   comprador: string;
   dentroPrazo: number;
@@ -56,14 +49,24 @@ export interface VolumeCompras {
   pendentesAutorizacao: number;
 }
 
-export interface DashboardResumo {
+export interface PeriodoAtual {
+  volumeCompras: VolumeCompras;
+  statusPedido: StatusPedido;
+  aderenciaSla: AderenciaSla;
+  modalidadePorComprador: ModalidadePorComprador[];
+  desempenhoPorComprador: DesempenhoComprador[];
+}
+
+export interface PeriodoAno {
   statusPedido: StatusPedido;
   aderenciaSla: AderenciaSla;
   devolucao: Devolucao;
   reincidencia: Reincidencia;
+  atrasosPorComprador: DesempenhoComprador[];
+}
+
+export interface DashboardResumo {
+  atual: PeriodoAtual;
+  ano: PeriodoAno;
   economia: EconomiaNegociacao;
-  atrasosPorGrupoProduto: AtrasoGrupoProduto[];
-  desempenhoPorComprador: DesempenhoComprador[];
-  modalidadePorComprador: ModalidadePorComprador[];
-  volumeCompras: VolumeCompras;
 }

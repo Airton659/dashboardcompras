@@ -29,6 +29,11 @@ body,
   height: 100%;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 html,
 body {
   overflow: hidden;
@@ -74,37 +79,38 @@ body {
   color: #c7cbe8;
 }
 
-.grid {
-  height: 94vh;
-  display: grid;
-  gap: 1vh 1vw;
+.main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
   padding: 1vh 1vw;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1.12fr 1fr;
-  grid-template-areas:
-    'status aderencia devolucao economia'
-    'atrasos atrasos desempenho desempenho'
-    'modalidade modalidade volume volume';
 }
 
 .card {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 1.2vh;
-  padding: 1.3vh 1vw;
+  padding: 1vh 1vw;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow: hidden;
   box-shadow: 0 1px 2px rgba(20, 29, 92, 0.05);
 }
 .ct {
-  font-size: 1.8vh;
+  font-size: 1.5vh;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 .chead {
   flex: none;
-  margin-bottom: 1vh;
+  margin-bottom: 0.5vh;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6vw;
+  flex-wrap: wrap;
 }
 .cbody {
   flex: 1;
@@ -113,56 +119,249 @@ body {
   justify-content: center;
   min-height: 0;
 }
+.card-meta {
+  font-size: 0.95vh;
+  color: var(--slate2);
+}
 
-.a-atrasos {
-  grid-area: atrasos;
+/* banner de destaque (Economia em negociação) */
+.banner {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2vw;
 }
-.a-desempenho {
-  grid-area: desempenho;
+.eco-label {
+  font-size: 1.05vh;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--slate2);
 }
-.a-modalidade {
-  grid-area: modalidade;
+.eco-figure {
+  font-weight: 900;
+  font-size: 3vh;
+  color: var(--green);
+  line-height: 1.05;
 }
-.a-volume {
-  grid-area: volume;
+.compare {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35vh;
 }
-.a-status {
-  grid-area: status;
+.compare-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2vw;
+  font-size: 1.25vh;
+  color: var(--slate);
 }
-.a-aderencia {
-  grid-area: aderencia;
+.compare-line b {
+  font-weight: 700;
+  font-size: 1.35vh;
+}
+.compare-line.cotado b {
+  color: #475569;
+}
+.compare-line.negociado b {
+  color: var(--navy);
+}
+.compare-track {
+  height: 0.5vh;
+  border-radius: 0.3vh;
+  background: var(--line);
+  overflow: hidden;
+  margin-top: 0.15vh;
+}
+.compare-fill {
+  height: 100%;
+  background: var(--navy);
+  border-radius: 0.3vh;
+}
+.obs {
+  font-size: 1vh;
+  color: var(--slate2);
+  max-width: 26ch;
+  line-height: 1.4;
+  border-left: 2px solid var(--line);
+  padding-left: 1vw;
+}
+
+/* colunas Atual / Ano */
+.columns {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1vw;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.col-head {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 0.4vh;
+  margin-bottom: 0.6vh;
+}
+.col-head h2 {
+  margin: 0;
+  font-size: 1.7vh;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.col-head .range {
+  font-size: 1.05vh;
+  color: var(--slate2);
+  font-weight: 600;
+}
+.col-stack {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.a-volume-atual {
+  flex: 13.8 1 13.8vh;
+}
+.a-status-atual {
+  flex: 8.7 1 8.7vh;
+}
+.a-aderencia-atual {
+  flex: 12.4 1 12.4vh;
+}
+.a-modpct {
+  flex: 8.5 1 8.5vh;
+}
+.a-grafico03 {
+  flex: 17.4 1 17.4vh;
+}
+.a-status-ano {
+  flex: 8.7 1 8.7vh;
+}
+.a-aderencia-ano {
+  flex: 12.4 1 12.4vh;
 }
 .a-devolucao {
-  grid-area: devolucao;
+  flex: 17.3 1 17.3vh;
 }
-.a-economia {
-  grid-area: economia;
+.a-atrasos-comprador {
+  flex: 18.6 1 18.6vh;
+}
+
+.modpct-bar {
+  display: flex;
+  width: 100%;
+  height: 2.3vh;
+  border-radius: 0.6vh;
+  overflow: hidden;
+  flex: none;
+}
+.modpct-bar span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1vh;
+  font-weight: 800;
+}
+
+/* Gráfico 03 — desempenho + modalidade por comprador */
+.row-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 0;
+}
+.comp-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+}
+.comp-name {
+  width: 8.5vw;
+  text-align: right;
+  font-size: 1.05vh;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: none;
+}
+.comp-bar-wrap {
+  flex: 1;
+  display: flex;
+  height: 2vh;
+  border-radius: 0.5vh;
+  overflow: hidden;
+}
+.comp-bar-wrap div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.95vh;
+  font-weight: 700;
+}
+.pill {
+  width: 3.6vw;
+  flex: none;
+  text-align: center;
+  font-size: 1vh;
+  font-weight: 800;
+  padding: 0.25vh 0;
+  border-radius: 999px;
+}
+.pill-good {
+  background: rgba(47, 163, 90, 0.15);
+  color: var(--green);
+}
+.pill-warn {
+  background: rgba(224, 160, 32, 0.18);
+  color: #8a5c00;
+}
+.pill-crit {
+  background: rgba(214, 69, 69, 0.15);
+  color: var(--danger);
 }
 
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6vh 1.1vw;
-  margin-top: 1vh;
+  gap: 0.4vh 0.9vw;
+  margin-top: 0.5vh;
+  flex: none;
 }
 .lg {
   display: flex;
   align-items: center;
-  gap: 0.4vw;
-  font-size: 1.35vh;
+  gap: 0.35vw;
+  font-size: 1.05vh;
   color: #475569;
+  white-space: nowrap;
 }
 .sw {
-  width: 1.2vh;
-  height: 1.2vh;
+  width: 1vh;
+  height: 1vh;
   border-radius: 3px;
+  flex: none;
 }
 .sw.r {
   border-radius: 999px;
 }
 .sublabel {
-  font-size: 1.4vh;
+  font-size: 0.95vh;
   font-weight: 600;
   color: var(--slate);
-  margin-bottom: 0.6vh;
+  margin-bottom: 0.3vh;
 }

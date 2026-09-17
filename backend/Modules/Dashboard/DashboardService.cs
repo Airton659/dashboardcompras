@@ -9,18 +9,28 @@ public class DashboardService(IPedidoCompraQueries pedidoCompraQueries)
     public async Task<DashboardResumo> ObterResumoAsync()
     {
         var pedidos = await pedidoCompraQueries.ListarAsync();
+        var pedidosAtual = pedidos.Where(p => p.DataEntrada >= DateTime.Today.AddMonths(-3)).ToList();
+        var pedidosAno = pedidos.Where(p => p.DataEntrada.Year == DateTime.Today.Year).ToList();
 
         return new DashboardResumo
         {
-            StatusPedido = MontarStatusPedido(pedidos),
-            AderenciaSla = MontarAderenciaSla(pedidos),
-            Devolucao = MontarDevolucao(pedidos),
-            Reincidencia = MontarReincidencia(pedidos),
+            Atual = new PeriodoAtual
+            {
+                VolumeCompras = MontarVolumeCompras(pedidosAtual),
+                StatusPedido = MontarStatusPedido(pedidosAtual),
+                AderenciaSla = MontarAderenciaSla(pedidosAtual),
+                ModalidadePorComprador = MontarModalidadePorComprador(pedidosAtual),
+                DesempenhoPorComprador = MontarDesempenhoPorComprador(pedidosAtual),
+            },
+            Ano = new PeriodoAno
+            {
+                StatusPedido = MontarStatusPedido(pedidosAno),
+                AderenciaSla = MontarAderenciaSla(pedidosAno),
+                Devolucao = MontarDevolucao(pedidosAno),
+                Reincidencia = MontarReincidencia(pedidosAno),
+                AtrasosPorComprador = MontarDesempenhoPorComprador(pedidosAno),
+            },
             Economia = MontarEconomia(pedidos),
-            AtrasosPorGrupoProduto = MontarAtrasosPorGrupoProduto(pedidos),
-            DesempenhoPorComprador = MontarDesempenhoPorComprador(pedidos),
-            ModalidadePorComprador = MontarModalidadePorComprador(pedidos),
-            VolumeCompras = MontarVolumeCompras(pedidos),
         };
     }
 
@@ -79,26 +89,6 @@ public class DashboardService(IPedidoCompraQueries pedidoCompraQueries)
 
         return new EconomiaNegociacao { ValorCotado = cotado, ValorNegociado = negociado, Economia = cotado - negociado };
     }
-
-    static List<AtrasoGrupoProduto> MontarAtrasosPorGrupoProduto(List<PedidoCompra> pedidos) =>
-        pedidos
-            .Where(p => p.Situacao == "Concluido" && p.GrupoProduto is not null)
-            .GroupBy(p => p.GrupoProduto!)
-            .Select(g =>
-            {
-                var total = g.Count();
-                var emAtraso = g.Count(p => p.StatusSla == "Fora do prazo");
-                return new AtrasoGrupoProduto
-                {
-                    GrupoProduto = g.Key,
-                    NoPrazo = total - emAtraso,
-                    EmAtraso = emAtraso,
-                    PercentualAtraso = total == 0 ? 0 : Math.Round(emAtraso * 100.0 / total, 1),
-                };
-            })
-            .OrderByDescending(g => g.NoPrazo + g.EmAtraso)
-            .Take(7)
-            .ToList();
 
     static List<DesempenhoComprador> MontarDesempenhoPorComprador(List<PedidoCompra> pedidos) =>
         pedidos

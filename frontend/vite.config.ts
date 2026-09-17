@@ -8,8 +8,11 @@ export default defineConfig({
   },
   server: {
     port: 5185,
+    watch: {
+      usePolling: true,
+    },
     proxy: {
-      '/api': 'http://localhost:5085',
+      '/api': process.env.BACKEND_URL || 'http://localhost:5085',
     },
   },
 });

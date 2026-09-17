@@ -2,7 +2,7 @@ using DashboardCorrente.Infra.Container;
 using DashboardCorrente.Modules.Dashboard;
 using DotNetEnv;
 
-Env.TraversePath().Load();
+Env.NoClobber().TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDashboardCorrente(builder.Configuration);
