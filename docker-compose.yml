@@ -1,0 +1,30 @@
+# Ainda não existe CI publicando imagem num registry (como o GATI faz pro GHCR),
+# então aqui builda localmente a partir dos Dockerfiles de produção em vez de puxar
+# uma imagem já publicada. Trocar `build:` por `image: <registry>/...` quando existir
+# um pipeline de publicação.
+name: dashboardcorrente
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dashboardcorrente_backend
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    env_file:
+      - ./backend/.env.docker
+    ports:
+      - "5011:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dashboardcorrente_frontend
+    restart: unless-stopped
+    ports:
+      - "8091:80"
+    depends_on:
+      - backend
