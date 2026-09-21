@@ -13,7 +13,10 @@ export default defineConfig({
       usePolling: true,
     },
     proxy: {
-      '/api': process.env.BACKEND_URL || 'http://localhost:5085',
+      '/dash-compras-sla/api': {
+        target: process.env.BACKEND_URL || 'http://localhost:5085',
+        rewrite: (path) => path.replace(/^\/dash-compras-sla/, ''),
+      },
     },
   },
 });
