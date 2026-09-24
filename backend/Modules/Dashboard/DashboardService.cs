@@ -101,6 +101,7 @@ public class DashboardService(IPedidoCompraQueries pedidoCompraQueries)
                 return new DesempenhoComprador
                 {
                     Comprador = g.Key,
+                    Codigo = g.First().ChapaResponsavelCompras ?? "—",
                     DentroPrazo = dentroPrazo,
                     ForaPrazo = total - dentroPrazo,
                     PercentualDentroPrazo = total == 0 ? 0 : Math.Round(dentroPrazo * 100.0 / total, 1),
