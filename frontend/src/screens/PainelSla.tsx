@@ -144,7 +144,7 @@ export function PainelSla({ dados, ultimaAtualizacao, atualizando }: PainelSlaPr
               >
                 <Heatmap
                   rows={ano.atrasosPorComprador.map((d) => ({
-                    label: d.comprador,
+                    label: d.codigo,
                     dentro: d.dentroPrazo,
                     fora: d.foraPrazo,
                     pct: Math.round(100 - d.percentualDentroPrazo),

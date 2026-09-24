@@ -29,6 +29,7 @@ export interface EconomiaNegociacao {
 
 export interface DesempenhoComprador {
   comprador: string;
+  codigo: string;
   dentroPrazo: number;
   foraPrazo: number;
   percentualDentroPrazo: number;

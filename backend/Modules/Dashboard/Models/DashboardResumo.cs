@@ -62,6 +62,7 @@ public record EconomiaNegociacao
 public record DesempenhoComprador
 {
     public required string Comprador { get; init; }
+    public required string Codigo { get; init; }
     public required int DentroPrazo { get; init; }
     public required int ForaPrazo { get; init; }
     public required double PercentualDentroPrazo { get; init; }

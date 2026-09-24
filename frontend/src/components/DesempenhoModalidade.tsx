@@ -1,5 +1,6 @@
 interface LinhaDesempenho {
   comprador: string;
+  codigo: string;
   percentualDentroPrazo: number;
 }
 
@@ -43,7 +44,7 @@ export function DesempenhoModalidade({
           const larguraBarra = (total / maiorTotal) * 100;
           return (
             <div className="comp-row" key={d.comprador}>
-              <span className="comp-name">{d.comprador}</span>
+              <span className="comp-name">{d.codigo}</span>
               <div className="comp-bar-wrap" style={{ width: `${larguraBarra}%` }}>
                 {m &&
                   SEGMENTOS_MODALIDADE.map((s) => {
